@@ -17,7 +17,7 @@ M.toggle = function()
     if buf == terminalBuf then
         -- Switch back to the buffer that was previously active
         -- in the current window.
-        local previousBuf = vim.w["TT_buf"]
+        local previousBuf = vim.w["TT:buf"]
         if previousBuf == nil then
             return
         end
@@ -32,8 +32,8 @@ M.toggle = function()
         vim.api.nvim_win_set_buf(win, terminalBuf)
         if init then
             vim.fn.termopen("/bin/bash")
-            vim.cmd("startinsert")
         end
+        vim.cmd("startinsert")
     end
 end
 
