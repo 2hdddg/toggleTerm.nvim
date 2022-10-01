@@ -4,7 +4,7 @@ local terminalBuf = nil
 
 M.toggle = function()
     local init = false
-    if terminalBuf == nil then
+    if terminalBuf == nil or (not vim.api.nvim_buf_is_valid(terminalBuf)) then
         -- Need to initialize the terminal in a real windows
         -- This case implies switching to terminal.
         terminalBuf = vim.api.nvim_create_buf(false, true)
