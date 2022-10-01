@@ -17,7 +17,14 @@ M.toggle = function()
     if buf == terminalBuf then
         -- Switch back to the buffer that was previously active
         -- in the current window.
-        vim.api.nvim_win_set_buf(win, vim.api.nvim_win_get_var(win, "TT:buf"))
+        local previousBuf = vim.w["TT_buf"]
+        if previousBuf == nil then
+            return
+        end
+        if not vim.api.nvim_buf_is_valid(previousBuf) then
+            return
+        end
+        vim.api.nvim_win_set_buf(win, previousBuf)
     else
         -- Switch to terminal, stash away the buffer that was active
         -- in this window.
